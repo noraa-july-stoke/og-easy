@@ -1,8 +1,9 @@
 # og-easy
 
-The `og-easy` package provides a simple and easy-to-use API for getting Open Graph data from a URL. It includes an "alt" object
-that provides alternatives in case something is wrong with the
-site's meta/og tags
+The `og-easy` package provides a simple, lightweight and easy-to-use
+API for getting Open Graph data from a URL. It includes an "alt" object
+that provides alternatives in case something is wrong with the site's
+meta/og tags.
 
 ## Installation
 
@@ -21,16 +22,21 @@ const getSiteMetaData = require("og-easy");
 const router = express.Router();
 
 // and then implement it in your route as follows:
+//==================================================================================
+// Fetches URL previews from opengraph API
+//==================================================================================
 router.get("/opengraph-preview", async (req, res) => {
-  const url = req.query.url;
-
-  try {
-    const metadata = await getSiteMetaData(url);
-    res.status(200).json(metadata);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error retrieving metadata");
+  const url = req.query?.url;
+  if (url) {
+    try {
+      const metadata = await getSiteMetaData(url);
+      res.status(200).json(metadata);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Error retrieving metadata");
+    }
   }
+  else res.status(404).send("No url found");
 });
 
 module.exports = router;
@@ -74,16 +80,14 @@ router.get("/opengraph-preview", async (req, res) => {
 }
 ```
 
+## React Component
+
 ### Here is an example react component that utilizes this method:
 
 ```javascript
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
-const PostLink = ({ url }) => {
-  const [linkData, setLinkData] = useState({});
 
   const fetchOpenGraphData = async (url) => {
   try {
@@ -93,6 +97,11 @@ const PostLink = ({ url }) => {
     console.error(error);
   }
 };
+
+
+const PostLink = ({ url }) => {
+  const [linkData, setLinkData] = useState({});
+
 
   useEffect(() => {
     const fetchData = async () => {

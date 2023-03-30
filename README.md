@@ -41,11 +41,8 @@ meta/og tags.
 ```sh
 npm install og-easy
 ```
-## Usage
 
-
-# The following are known bugs or issues that have been identified:
-<font color="red">Issue 1: Instagram profile images won't load properly. We are actively working on this.</font>
+# Usage
 
 ### Here is an example route you can implement on the backend
 

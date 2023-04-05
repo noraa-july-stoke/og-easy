@@ -31,6 +31,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSiteMetaData = void 0;
 const axios = require("axios");
 const cheerio = require("cheerio");
+
 async function getSiteMetaData(url) {
     try {
         // Check if the URL starts with 'http', and add 'http://' if not
@@ -74,4 +75,6 @@ async function getSiteMetaData(url) {
         throw error;
     }
 }
+
+
 exports.getSiteMetaData = getSiteMetaData;
